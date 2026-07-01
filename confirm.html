@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бронь подтверждена — В Моменте</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#F6C500;
+    --cream:#FBF6E9;
+    --paper:#F4EDDA;
+    --black:#1B1812;
+    --charcoal:#322D24;
+    --line:rgba(27,24,18,0.16);
+    --line-strong:rgba(27,24,18,0.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+
+  /* header */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:0 24px;
+  }
+  header .inner{
+    max-width:680px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Oswald';font-weight:700;font-size:20px;text-transform:uppercase;
+  }
+  .logo .dot{width:10px;height:10px;border-radius:50%;background:var(--yellow);border:2px solid var(--black);}
+
+  /* main */
+  main{padding:56px 0 80px;}
+
+  /* success badge */
+  .success-badge{
+    width:72px;height:72px;border-radius:50%;
+    background:var(--yellow);border:3px solid var(--black);
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;margin-bottom:24px;
+    animation:pop .4s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+
+  h1{
+    font-family:'Oswald';font-size:clamp(28px,5vw,42px);font-weight:700;
+    line-height:1.05;margin-bottom:12px;
+  }
+  .subtitle{font-size:17px;color:var(--charcoal);line-height:1.6;margin-bottom:36px;}
+
+  /* order summary */
+  .order{
+    background:var(--paper);border:1.5px solid var(--line-strong);border-radius:18px;
+    padding:28px 26px;margin-bottom:32px;
+  }
+  .order-title{
+    font-family:'JetBrains Mono';font-size:12px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--charcoal);margin-bottom:18px;
+  }
+  .order-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:10px 0;border-bottom:1px dashed var(--line-strong);
+    font-size:15px;
+  }
+  .order-row:last-child{border-bottom:none;}
+  .order-row span{color:var(--charcoal);}
+  .order-row b{font-weight:700;}
+  .order-total{
+    margin-top:16px;padding-top:16px;border-top:2px solid var(--black);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .order-total span{font-size:14px;color:var(--charcoal);}
+  .order-total b{font-family:'Oswald';font-size:28px;color:var(--black);}
+
+  /* QR block */
+  .qr-block{
+    background:var(--black);color:#fff;
+    border-radius:20px;padding:36px 26px;
+    text-align:center;margin-bottom:28px;
+  }
+  .qr-block h2{
+    font-family:'Oswald';font-size:22px;font-weight:600;
+    margin-bottom:10px;
+  }
+  .qr-block p{font-size:14px;color:#BDB6A2;line-height:1.55;margin-bottom:28px;}
+
+  .qr-image-wrap{
+    background:#fff;border-radius:14px;padding:20px;
+    display:inline-block;margin-bottom:20px;
+  }
+  .qr-image-wrap img{
+    width:200px;height:200px;display:block;object-fit:contain;
+  }
+  /* placeholder when no QR image */
+  .qr-placeholder{
+    width:200px;height:200px;
+    background:#F4EDDA;border-radius:8px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;color:var(--charcoal);font-size:13px;font-family:'JetBrains Mono';
+    text-align:center;padding:16px;
+  }
+  .qr-placeholder .qr-icon{font-size:40px;}
+
+  .amount-label{
+    font-family:'JetBrains Mono';font-size:13px;color:#BDB6A2;margin-bottom:6px;
+  }
+  .amount-value{
+    font-family:'Oswald';font-size:36px;font-weight:700;color:var(--yellow);
+  }
+
+  /* steps */
+  .steps{margin-bottom:32px;}
+  .steps-title{
+    font-family:'JetBrains Mono';font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--charcoal);
+    margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .steps-title::before{content:"";width:22px;height:2px;background:var(--black);}
+  .step{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:16px 0;border-bottom:1px dashed var(--line);
+  }
+  .step:last-child{border-bottom:none;}
+  .step-num{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--yellow);border:2px solid var(--black);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono';font-size:13px;font-weight:700;
+    flex:0 0 auto;
+  }
+  .step-text{font-size:15px;line-height:1.55;padding-top:4px;}
+  .step-text b{display:block;margin-bottom:3px;}
+
+  /* notice */
+  .notice{
+    background:var(--paper);border:1.5px dashed var(--line-strong);
+    border-radius:14px;padding:20px 22px;
+    font-size:14px;line-height:1.6;color:var(--charcoal);
+    margin-bottom:32px;
+  }
+  .notice strong{color:var(--black);}
+
+  /* back button */
+  .back-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--black);color:var(--cream);
+    padding:14px 28px;border-radius:999px;
+    font-weight:700;font-size:15px;font-family:'Manrope';
+    border:2px solid var(--black);
+    transition:background .2s,color .2s,transform .2s;
+  }
+  .back-btn:hover{background:var(--yellow);color:var(--black);transform:translateY(-2px);}
+
+  @media(max-width:480px){
+    main{padding:36px 0 60px;}
+    .order{padding:20px 18px;}
+    .qr-block{padding:28px 18px;}
+    .qr-image-wrap img,.qr-placeholder{width:170px;height:170px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <a href="index.html" class="logo"><span class="dot"></span>В Моменте</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="success-badge">🎉</div>
+
+    <h1>Место забронировано!</h1>
+    <p class="subtitle">Осталось один шаг — переведи залог по QR-коду ниже. Без оплаты залога место не считается забронированным.</p>
+
+    <!-- сводка заявки -->
+    <div class="order">
+      <div class="order-title">Твоя заявка</div>
+      <div class="order-row"><span>Имя</span><b id="r-name">—</b></div>
+      <div class="order-row"><span>Телефон</span><b id="r-phone">—</b></div>
+      <div class="order-row"><span>Город</span><b id="r-city">—</b></div>
+      <div class="order-row"><span>Смена</span><b id="r-camp">—</b></div>
+      <div class="order-row"><span>Участников</span><b id="r-count">—</b></div>
+      <div class="order-total">
+        <span>Залог к оплате</span>
+        <b id="r-deposit">—</b>
+      </div>
+    </div>
+
+    <!-- QR блок -->
+    <div class="qr-block">
+      <h2>Оплата залога</h2>
+      <p>Наведи камеру телефона на QR-код и переведи точную сумму. Остаток — наличными на месте в день смены.</p>
+
+      <div class="qr-image-wrap">
+        <div class="qr-placeholder" id="qr-container">
+          <span class="qr-icon">📲</span>
+          <span id="qr-hint">QR-код<br>загружается…</span>
+        </div>
+      </div>
+
+      <div class="amount-label">К переводу</div>
+      <div class="amount-value" id="qr-amount">—</div>
+    </div>
+
+    <!-- шаги -->
+    <div class="steps-title">Что делать дальше</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><b>Оплати залог по QR-коду</b>Наведи камеру телефона, переведи точную сумму залога.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><b>Дождись подтверждения</b>Мы получим оплату и напишем тебе в течение часа — номер телефона, который ты указал.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><b>Приезжай на смену</b>Остаток суммы (<span id="r-rest">—</span>) — наличными в день смены на месте.</div>
+      </div>
+    </div>
+
+    <!-- важное -->
+    <div class="notice">
+      <strong>Важно:</strong> переводи точную сумму залога, указанную выше. Другие суммы не привязываются к заявке автоматически. Если возникли вопросы — напиши нам в <a href="https://t.me/" style="color:var(--black);font-weight:700;">Telegram</a>.
+    </div>
+
+    <a href="index.html" class="back-btn">← Вернуться на главную</a>
+
+  </div>
+</main>
+
+<script>
+  // QR images map: deposit amount → filename in img/qr/ folder
+  // Когда получишь QR-коды от банка — положи их в папку img/qr/
+  // и они автоматически подставятся нужные по сумме
+  const QR_IMAGES = {
+    1000: 'img/qr/qr_1000.png',
+    2000: 'img/qr/qr_2000.png',
+    3000: 'img/qr/qr_3000.png',
+    4000: 'img/qr/qr_4000.png',
+    5000: 'img/qr/qr_5000.png',
+  };
+
+  // Цены смен (для расчёта остатка)
+  const CAMP_PRICES = {
+    'samara': 6800,
+    'tyumen': 6400,
+    'izhevsk': 6800,
+    'saratov': 6800,
+    'tagil': 6800,
+  };
+
+  function fmt(n){ return Number(n).toLocaleString('ru-RU') + ' ₽'; }
+
+  // читаем параметры из URL
+  const p = new URLSearchParams(window.location.search);
+  const name    = p.get('name')    || '—';
+  const phone   = p.get('phone')   || '—';
+  const city    = p.get('city')    || '—';
+  const camp    = p.get('camp')    || '—';
+  const count   = parseInt(p.get('count') || '1', 10);
+  const deposit = parseInt(p.get('deposit') || '1000', 10);
+
+  // вычисляем остаток: берём цену по ключу смены из URL или из текста
+  // ключ смены — первое слово после «— » в тексте опции (samara, tyumen и т.д.)
+  // проще: передаём его отдельно
+  const campKey = p.get('campKey') || '';
+  const campPrice = CAMP_PRICES[campKey] || 0;
+  const rest = campPrice > 0 ? (campPrice * count - deposit) : null;
+
+  // заполняем сводку
+  document.getElementById('r-name').textContent    = name;
+  document.getElementById('r-phone').textContent   = phone;
+  document.getElementById('r-city').textContent    = city;
+  document.getElementById('r-camp').textContent    = camp;
+  document.getElementById('r-count').textContent   = count + (count === 1 ? ' человек' : count < 5 ? ' человека' : ' человек');
+  document.getElementById('r-deposit').textContent = fmt(deposit);
+  document.getElementById('qr-amount').textContent = fmt(deposit);
+  document.getElementById('r-rest').textContent    = rest !== null ? fmt(rest) : 'остаток';
+
+  // подставляем QR-картинку
+  const qrContainer = document.getElementById('qr-container');
+  const qrPath = QR_IMAGES[deposit];
+  if(qrPath){
+    const img = document.createElement('img');
+    img.src = qrPath;
+    img.alt = 'QR-код для оплаты ' + fmt(deposit);
+    img.onload = () => { qrContainer.replaceWith(img.parentNode || img); };
+    // заменяем placeholder на img внутри того же wrapper
+    qrContainer.innerHTML = '';
+    qrContainer.appendChild(img);
+    qrContainer.style.background = '#fff';
+  } else {
+    document.getElementById('qr-hint').textContent = 'QR-код\nбудет добавлен\nорганизатором';
+  }
+</script>
+
+</body>
+</html>

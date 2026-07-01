@@ -330,6 +330,28 @@
     display:flex;justify-content:space-between;font-size:12.5px;color:var(--charcoal);flex-wrap:wrap;gap:10px;
   }
 
+  /* ===== scroll animations ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.from-left{transform:translateX(-36px);}
+  .reveal.from-right{transform:translateX(36px);}
+  .reveal.visible{
+    opacity:1;
+    transform:translate(0,0);
+  }
+  .reveal-delay-1{transition-delay:.1s;}
+  .reveal-delay-2{transition-delay:.2s;}
+  .reveal-delay-3{transition-delay:.3s;}
+  .reveal-delay-4{transition-delay:.4s;}
+  .reveal-delay-5{transition-delay:.5s;}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
   @media (max-width: 980px){
     .hero-grid{grid-template-columns:1fr;}
     .badge-wrap{order:-1;margin-bottom:10px;}
@@ -396,7 +418,7 @@
 <section class="hero">
   <div class="hero-photo"></div>
   <div class="wrap hero-grid">
-    <div>
+    <div class="reveal from-left">
       <div class="eyebrow"><span class="pulse"></span>однодневный лагерь · 28+</div>
       <h1>Вернись<br>в лето,<br><span>в моменте</span></h1>
       <p class="lead">Один день без работы, кредитов и дедлайнов. Дворовые игры, отрядная песня, дискотека у костра — всё, что было важно в детстве, теперь снова важно.</p>
@@ -410,7 +432,7 @@
         <div><b>5&nbsp;городов</b><span>в сезоне 2026</span></div>
       </div>
     </div>
-    <div class="badge-wrap">
+    <div class="badge-wrap reveal from-right">
       <svg class="badge" viewBox="0 0 320 320" fill="none">
         <circle cx="160" cy="160" r="155" fill="var(--cream)" stroke="var(--black)" stroke-width="3"/>
         <circle cx="160" cy="160" r="132" fill="var(--yellow)" stroke="var(--black)" stroke-width="2"/>
@@ -441,7 +463,7 @@
 
     <div class="cards-row">
 
-      <div class="camp-card">
+      <div class="camp-card reveal reveal-delay-1">
         <div class="photo" style="background:url('img/samara.jpg') center/cover no-repeat;">
           <span class="tag">18–19 июля · сб–вс</span>
         </div>
@@ -457,7 +479,7 @@
         </div>
       </div>
 
-      <div class="camp-card">
+      <div class="camp-card reveal reveal-delay-2">
         <div class="photo" style="background:url('img/tyumen.jpg') center/cover no-repeat;">
           <span class="tag">25–26 июля · сб–вс</span>
         </div>
@@ -473,7 +495,7 @@
         </div>
       </div>
 
-      <div class="camp-card">
+      <div class="camp-card reveal reveal-delay-3">
         <div class="photo" style="background:url('img/izhevsk.jpg') center/cover no-repeat;">
           <span class="tag">25–26 июля · сб–вс</span>
         </div>
@@ -489,7 +511,7 @@
         </div>
       </div>
 
-      <div class="camp-card">
+      <div class="camp-card reveal reveal-delay-1">
         <div class="photo" style="background:url('img/saratov.jpg') center/cover no-repeat;">
           <span class="tag">8–9 августа · сб–вс</span>
         </div>
@@ -505,7 +527,7 @@
         </div>
       </div>
 
-      <div class="camp-card">
+      <div class="camp-card reveal reveal-delay-2">
         <div class="photo" style="background:url('img/tagil.jpg') center/cover no-repeat;">
           <span class="tag">8–9 августа · сб–вс</span>
         </div>
@@ -536,19 +558,19 @@
     <p class="sub">Мы воссоздаём не картинку из инстаграма, а ощущение: отряд, вожатый, дворовые игры до темноты и то самое чувство, что сегодняшний день не похож ни на один будний.</p>
 
     <div class="concept-grid">
-      <div class="concept-card">
+      <div class="concept-card reveal reveal-delay-1">
         <img class="ic-photo" src="img/squad.jpg" alt="Отряд и вожатый">
         <span class="num">/ 01</span>
         <h3>Отряд и вожатый</h3>
         <p>Никаких «организаторов мероприятия» — у вас настоящий отряд, девиз, речёвка и вожатый, который доведёт день до дискотеки.</p>
       </div>
-      <div class="concept-card">
+      <div class="concept-card reveal reveal-delay-2">
         <img class="ic-photo" src="img/games.jpg" alt="Дворовые игры">
         <span class="num">/ 02</span>
         <h3>Дворовые игры</h3>
         <p>Резиночки, картошка, ручеёк, вышибалы — те самые игры, в которые вы не играли двадцать лет, а тело помнит.</p>
       </div>
-      <div class="concept-card">
+      <div class="concept-card reveal reveal-delay-3">
         <img class="ic-photo" src="img/fire.jpg" alt="Костёр и свечка">
         <span class="num">/ 03</span>
         <h3>Костёр и свечка</h3>
@@ -770,7 +792,7 @@
 </footer>
 
 <script>
-  // FAQ accordion
+  // ── FAQ accordion ──
   document.querySelectorAll('.faq-item').forEach(item=>{
     const q = item.querySelector('.faq-q');
     const a = item.querySelector('.faq-a');
@@ -787,7 +809,7 @@
     });
   });
 
-  // deposit calculation
+  // ── deposit calculation ──
   const countEl = document.getElementById('f-count');
   const depositEl = document.getElementById('depositSum');
   const DEPOSIT_PER_PERSON = 1000;
@@ -802,16 +824,37 @@
   countEl.addEventListener('change', updateDeposit);
   updateDeposit();
 
-  // form submit placeholder (will be wired to backend API next step)
+  // ── form submit → redirect to confirm page ──
   document.getElementById('bookForm').addEventListener('submit', function(e){
     e.preventDefault();
     const count = parseInt(countEl.value, 10);
     if(count >= 6){
-      alert('Для группы от 6 человек, пожалуйста, напишите нам в Telegram — мы оформим бронь индивидуально.');
+      alert('Для группы от 6 человек напишите нам в Telegram — оформим бронь индивидуально.');
       return;
     }
-    alert('Здесь форма отправит заявку на сервер и переведёт вас на страницу оплаты залога по QR-коду (подключим на следующем шаге).');
+    const name   = document.getElementById('f-name').value.trim();
+    const phone  = document.getElementById('f-phone').value.trim();
+    const city   = document.getElementById('f-city').value.trim();
+    const campSel = document.getElementById('f-camp');
+    const campText = campSel.options[campSel.selectedIndex].text;
+    const campKey  = campSel.value;
+    const deposit  = count * DEPOSIT_PER_PERSON;
+
+    const params = new URLSearchParams({name, phone, city, camp: campText, campKey, count, deposit});
+    window.location.href = 'confirm.html?' + params.toString();
   });
+
+  // ── scroll reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.12});
+  revealEls.forEach(el => observer.observe(el));
 </script>
 
 </body>
